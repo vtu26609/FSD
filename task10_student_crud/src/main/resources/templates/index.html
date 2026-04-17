@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus | Student Management System</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;800&display=swap" rel="stylesheet">
+    <!-- Styles -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Student Nexus</h1>
+            <p style="color: var(--text-muted); font-size: 1.1rem;">Enterprise Student Information Management</p>
+        </header>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Total Students</div>
+                <div class="stat-value" th:text="${#lists.size(listStudents)}">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Active Records</div>
+                <div class="stat-value">100%</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">System Status</div>
+                <div class="stat-value" style="color: var(--success); font-size: 1.25rem;">ONLINE</div>
+            </div>
+        </div>
+
+        <div class="header-actions">
+            <div>
+                <h2 style="font-family: var(--font-display); font-size: 1.5rem;">Database Registry</h2>
+                <p style="color: var(--text-muted); font-size: 0.875rem;">Showing all enrolled students</p>
+            </div>
+            <a th:href="@{/showNewStudentForm}" class="btn btn-primary pulse">
+                <i data-lucide="plus-circle"></i>
+                Add New Student
+            </a>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Identity</th>
+                        <th>Email Address</th>
+                        <th>Department</th>
+                        <th style="text-align: right;">Operations</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="student : ${listStudents}">
+                        <td>
+                            <div class="student-info">
+                                <span class="student-name" th:text="${student.firstName + ' ' + student.lastName}">John Doe</span>
+                                <span style="font-size: 0.75rem; color: rgba(255,255,255,0.3);" th:text="'ID: #' + ${student.id}">#001</span>
+                            </div>
+                        </td>
+                        <td>
+                            <code th:text="${student.email}" style="color: var(--primary);">john@example.com</code>
+                        </td>
+                        <td>
+                            <span class="department-badge" th:text="${student.department}">Computer Science</span>
+                        </td>
+                        <td>
+                            <div class="actions" style="justify-content: flex-end;">
+                                <a th:href="@{/showFormForUpdate/{id}(id=${student.id})}" class="btn btn-secondary btn-sm" style="padding: 0.5rem 0.75rem; font-size: 0.8rem;">
+                                    <i data-lucide="edit-3" style="width: 14px; height: 14px;"></i>
+                                    Edit
+                                </a>
+                                <a th:href="@{/deleteStudent/{id}(id=${student.id})}" class="btn btn-danger btn-sm" style="padding: 0.5rem 0.75rem; font-size: 0.8rem;"
+                                   onclick="return confirm('Archive record permanently?')">
+                                    <i data-lucide="trash-2" style="width: 14px; height: 14px;"></i>
+                                    Delete
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(listStudents)}">
+                        <td colspan="4" style="text-align: center; padding: 4rem; color: var(--text-muted);">
+                            <i data-lucide="database" style="width: 48px; height: 48px; margin-bottom: 1rem; opacity: 0.2;"></i>
+                            <p>No student records found in the registry.</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management System</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>Student Management System</h1>
+        
+        <div class="header-actions">
+            <h2 style="color: var(--text-muted); font-size: 1.25rem;">Student List</h2>
+            <a th:href="@{/showNewStudentForm}" class="btn btn-primary">
+                <span>+</span> Add Student
+            </a>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Department</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="student : ${listStudents}">
+                        <td th:text="${student.firstName}"></td>
+                        <td th:text="${student.lastName}"></td>
+                        <td th:text="${student.email}"></td>
+                        <td th:text="${student.department}"></td>
+                        <td class="actions">
+                            <a th:href="@{/showFormForUpdate/{id}(id=${student.id})}" class="btn btn-secondary btn-sm">Edit</a>
+                            <a th:href="@{/deleteStudent/{id}(id=${student.id})}" class="btn btn-danger btn-sm" 
+                               onclick="return confirm('Are you sure you want to delete this student?')">Delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
