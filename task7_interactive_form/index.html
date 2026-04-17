@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Feedback System | Interactive Experience</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <main class="container">
+        <section class="feedback-card">
+            <header class="form-header">
+                <h1>Share Your Experience</h1>
+                <p>Help us improve with your valuable insights.</p>
+            </header>
+
+            <form id="feedbackForm" novalidate>
+                <div class="input-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" placeholder="John Doe" required>
+                    <span class="validation-label">Minimum 3 characters</span>
+                </div>
+
+                <div class="input-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="john@example.com" required>
+                    <span class="validation-label">Please enter a valid email</span>
+                </div>
+
+                <div class="input-group">
+                    <label for="subject">Subject</label>
+                    <select id="subject" required>
+                        <option value="" disabled selected>Select an option</option>
+                        <option value="support">Technical Support</option>
+                        <option value="billing">Billing Inquiry</option>
+                        <option value="feedback">General Feedback</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" rows="4" placeholder="How can we help you?" required></textarea>
+                    <span class="validation-label">Minimum 10 characters</span>
+                </div>
+
+                <div class="submit-container">
+                    <div class="info-tip">Double-click to submit</div>
+                    <button type="button" id="submitBtn" class="premium-btn">
+                        <span class="btn-text">Send Feedback</span>
+                        <div class="btn-loader"></div>
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Success Modal -->
+        <div id="successModal" class="modal">
+            <div class="modal-content">
+                <div class="success-icon">✓</div>
+                <h2>Success!</h2>
+                <p>Your feedback has been submitted securely.</p>
+                <button id="closeModal" class="secondary-btn">Close</button>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
